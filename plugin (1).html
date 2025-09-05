@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PluginDeals - Premium WordPress Plugins</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        )
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, #2c3e50, #4a6491);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: #2c3e50;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .product-description {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .product-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        .product-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .pay-btn, .active-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .pay-btn {
+            background: #3498db;
+            color: white;
+        }
+        
+        .pay-btn:hover {
+            background: #2980b9;
+        }
+        
+        .active-btn {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .active-btn:hover {
+            background: #27ae60;
+        }
+        
+        /* Payment Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .close-btn {
+            font-size: 24px;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+        
+        .payment-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .payment-info h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .payment-number {
+            font-size: 22px;
+            font-weight: 700;
+            color: #e74c3c;
+            margin: 10px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .submit-btn {
+            background: #2ecc71;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #27ae60;
+        }
+        
+        /* Success Page */
+        .success-page {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .success-icon {
+            font-size: 80px;
+            color: #2ecc71;
+            margin-bottom: 30px;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #3498db;
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: #3498db;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #3a546e;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-plug"></i>
+                    <span>PluginDeals</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Plugins</a></li>
+                        <li><a href="#">Themes</a></li>
+                        <li><a href="#">Bundle</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h3>Premium WordPress Plugins at Unbeatable Prices</h3>
+            <p>Get exclusive discounts on top-rated WordPress plugins and themes to enhance your website</p>
+            <a href="#" class="btn">Explore Deals</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products">
+        <div class="container">
+            <h2 class="section-title">Featured Plugins</h2>
+            <div class="product-grid">
+            
+            
+         
+         <!-- Product 2 -->
+         <div class="product-card">
+         <div class="product-image">
+         <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" alt="Luminar Neo Plugin">
+         </div>
+         <div class="product-info">
+         <h3 class="product-title">Luminar Neo AI Plugin</h3>
+         <p class="product-description">Add intelligent AI enhancements to your photos directly within Photoshop.</p>
+         <div class="product-price">$69.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$89.00</font></del></div>
+         <div class="product-buttons">
+         <button class="pay-btn" onclick="openPayment('Luminar Neo AI Plugin', 69.00)">Pay Now</button>
+         <button class="active-btn" onclick="activateProduct('Luminar Neo AI Plugin')">Active Now</button>
+         </div>
+         </div>
+         </div>
+         
+         <!-- Product 3 -->
+         <div class="product-card">
+         <div class="product-image">
+         <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" alt="Retouch4me Plugin">
+         </div>
+         <div class="product-info">
+         <h3 class="product-title">Retouch4me AI Suite</h3>
+         <p class="product-description">AI-powered retouching plugins for skin, eyes, teeth, background cleanup, and more. Compatible with Photoshop.1</p>
+         <div class="product-price">$129.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$159.00</font></del></div>
+         <div class="product-buttons">
+         <button class="pay-btn" onclick="openPayment('Retouch4me AI Suite', 129.00)">Pay Now</button>
+         <button class="active-btn" onclick="activateProduct('Retouch4me AI Suite')">Active Now</button>
+         </div>
+         </div>
+         </div>
+         
+         <!-- Product 4 -->
+         <div class="product-card">
+         <div class="product-image">
+         <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" alt="Nik Collection 7 Plugin">
+         </div>
+         <div class="product-info">
+         <h3 class="product-title">Nik Collection 7</h3>
+         <p class="product-description">Premium suite of Photoshop plugins offering advanced color, sharpness, HDR, and analog film effects.2</p>
+         <div class="product-price">$149.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$199.00</font></del></div>
+         <div class="product-buttons">
+         <button class="pay-btn" onclick="openPayment('Nik Collection 7', 149.00)">Pay Now</button>
+         <button class="active-btn" onclick="activateProduct('Nik Collection 7')">Active Now</button>
+         </div>
+         </div>
+         </div>
+         
+         <!-- Product 5 -->
+         <div class="product-card">
+         <div class="product-image">
+         <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" alt="Harry's Filters Plugin">
+         </div>
+         <div class="product-info">
+         <h3 class="product-title">Harry's Filters</h3>
+         <p class="product-description">Set of 69 image-effects including warp, patterns, color manipulations with randomizer.3</p>
+         <div class="product-price">$39.99 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$49.99</font></del></div>
+         <div class="product-buttons">
+         <button class="pay-btn" onclick="openPayment('Harry\'s Filters', 39.99)">Pay Now</button>
+         <button class="active-btn" onclick="activateProduct('Harry\'s Filters')">Active Now</button>
+         </div>
+         </div>
+         </div>
+         
+         <!-- Product 6 -->
+         <div class="product-card">
+         <div class="product-image">
+         <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" alt="SuperPNG Plugin">
+         </div>
+         <div class="product-info">
+         <h3 class="product-title">SuperPNG Compressor</h3>
+         <p class="product-description">Lossless PNG compression plugin to reduce file size while maintaining quality.4</p>
+         <div class="product-price">$14.99 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$19.99</font></del></div>
+         <div class="product-buttons">
+         <button class="pay-btn" onclick="openPayment('SuperPNG Compressor', 14.99)">Pay Now</button>
+         <button class="active-btn" onclick="activateProduct('SuperPNG Compressor')">Active Now</button>
+         </div>
+         </div>
+         </div>
+         
+         <!-- Product 7 -->
+         <div class="product-card">
+         <div class="product-image">
+         <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" alt="Swatchy Plugin">
+         </div>
+         <div class="product-info">
+         <h3 class="product-title">Swatch Organizer (Swatchy)</h3>
+         <p class="product-description">Organize your Color Swatches into folders for cleaner palette management.5</p>
+         <div class="product-price">$9.99 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$14.99</font></del></div>
+         <div class="product-buttons">
+         <button class="pay-btn" onclick="openPayment('Swatch Organizer (Swatchy)', 9.99)">Pay Now</button>
+         <button class="active-btn" onclick="activateProduct('Swatch Organizer (Swatchy)')">Active Now</button>
+         </div>
+         </div>
+         </div>
+         
+         <!-- Product 8 -->
+         <div class="product-card">
+         <div class="product-image">
+         <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" alt="GuideGuide Plugin">
+         </div>
+         <div class="product-info">
+         <h3 class="product-title">GuideGuide Pro</h3>
+         <p class="product-description">Create perfect guides: columns, rows, baselines, midpoints with presets.6</p>
+         <div class="product-price">$19.99 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$24.99</font></del></div>
+         <div class="product-buttons">
+         <button class="pay-btn" onclick="openPayment('GuideGuide Pro', 19.99)">Pay Now</button>
+         <button class="active-btn" onclick="activateProduct('GuideGuide Pro')">Active Now</button>
+         </div>
+         </div>
+         </div>
+         
+         <!-- Product 9 -->
+         <div class="product-card">
+         <div class="product-image">
+         <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" alt="Render.Ly Plugin">
+         </div>
+         <div class="product-info">
+         <h3 class="product-title">Render.Ly Exporter</h3>
+         <p class="product-description">Smart export plugin to export design specs, screens, and assets seamlessly.7</p>
+         <div class="product-price">$29.99 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$39.99</font></del></div>
+         <div class="product-buttons">
+         <button class="pay-btn" onclick="openPayment('Render.Ly Exporter', 29.99)">Pay Now</button>
+         <button class="active-btn" onclick="activateProduct('Render.Ly Exporter')">Active Now</button>
+         </div>
+         </div>
+         </div>
+         
+         <!-- Product 10 -->
+         <div class="product-card">
+         <div class="product-image">
+         <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" alt="Icon Board Plugin">
+         </div>
+         <div class="product-info">
+         <h3 class="product-title">Icon Board</h3>
+         <p class="product-description">Define icon presets and generate many variations as artboards in real-time.</p>
+         <div class="product-price">$12.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$17.00</font></del></div>
+         <div class="product-buttons">
+         <button class="pay-btn" onclick="openPayment('Icon Board', 12.00)">Pay Now</button>
+         <button class="active-btn" onclick="activateProduct('Icon Board')">Active Now</button>
+         </div>
+         </div>
+         </div>
+         
+         
+         
+         
+         
+         
+              <!-- Product A: Simon Says -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&fit=crop&w=870&q=80" alt="Simon Says Plugin Interface">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">Simon Says</h3>
+              <p class="product-description">Automatic transcription and captioning (100+ languages) inside Premiere Pro.1</p>
+              <div class="product-price">$49.99 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$69.99</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('Simon Says', 49.99)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('Simon Says')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              <!-- Product B: FilmConvert -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&fit=crop&w=870&q=80" alt="FilmConvert Plugin Interface">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">FilmConvert</h3>
+              <p class="product-description">Adds realistic film stock color grading with camera profiles and 3D LUT support.2</p>
+              <div class="product-price">$119.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$159.00</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('FilmConvert', 119.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('FilmConvert')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              <!-- Product C: Twixtor -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&fit=crop&w=870&q=80" alt="Twixtor Plugin Interface">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">Twixtor</h3>
+              <p class="product-description">High-quality slow motion by frame interpolation with fewer artifacts.3</p>
+              <div class="product-price">$175.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$225.00</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('Twixtor', 175.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('Twixtor')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              <!-- Product D: Red Giant Universe -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&fit=crop&w=870&q=80" alt="Red Giant Universe Interface">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">Red Giant Universe</h3>
+              <p class="product-description">A massive suite of GPU-accelerated effects and transitions (89+ plugins).4</p>
+              <div class="product-price">$299.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$399.00</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('Red Giant Universe', 299.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('Red Giant Universe')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              <!-- Product E: False Color -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&fit=crop&w=870&q=80" alt="False Color Plugin Interface">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">False Color</h3>
+              <p class="product-description">Visual exposure tool for accurate color grading with presets and 3D LUT export.5</p>
+              <div class="product-price">$49.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$69.00</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('False Color', 49.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('False Color')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              <!-- Product F: De:Noise -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&fit=crop&w=870&q=80" alt="De:Noise Plugin Interface">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">De:Noise</h3>
+              <p class="product-description">Powerful denoising that preserves detail with temporal filtering.6</p>
+              <div class="product-price">$89.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$109.00</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('De:Noise', 89.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('De:Noise')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              <!-- Product G: Neat Video -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&fit=crop&w=870&q=80" alt="Neat Video Interface">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">Neat Video</h3>
+              <p class="product-description">Advanced noise reduction to remove film grain, digital noise, and compression artifacts.7</p>
+              <div class="product-price">$99.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$129.00</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('Neat Video', 99.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('Neat Video')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              <!-- Product H: Boris FX Continuum -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&fit=crop&w=870&q=80" alt="Boris FX Continuum Interface">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">Boris FX Continuum</h3>
+              <p class="product-description">Over 300 effects + 40 transitions, includes Mocha tracking and Particle Illusion.8</p>
+              <div class="product-price">$749.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$899.00</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('Boris FX Continuum', 749.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('Boris FX Continuum')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              <!-- Product I: Frame.io Extension -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&fit=crop&w=870&q=80" alt="Frame.io Extension Interface">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">Frame.io Extension</h3>
+              <p class="product-description">Seamlessly upload, review, and annotate video within Premiere Pro workflow.9</p>
+              <div class="product-price">$0.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$0.00</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('Frame.io Extension', 0.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('Frame.io Extension')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              <!-- Product J: PluralEyes -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&fit=crop&w=870&q=80" alt="PluralEyes Plugin Interface">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">PluralEyes</h3>
+              <p class="product-description">Automatically sync audio and video clips without timecodes for multi-camera edits.10</p>
+              <div class="product-price">$199.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$249.00</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('PluralEyes', 199.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('PluralEyes')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              
+              
+              
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Form Builder">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Form Builder Pro</h3>
+                        <p class="product-description">Create custom forms, surveys, and quizzes with our drag-and-drop builder.</p>
+                        <div class="product-price">$39.99</div>
+                        <div class="product-buttons">
+                            <button class="pay-btn" onclick="openPayment('Form Builder Pro', 39.99)">Pay Now</button>
+                            <button class="active-btn" onclick="activateProduct('Form Builder Pro')">Active Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Complete Payment</h2>
+                <span class="close-btn" onclick="closePayment()">&times;</span>
+            </div>
+            <div class="payment-info">
+                <h3>Send payment via bKash</h3>
+                <p>Send exact amount to the following bKash number:</p>
+                <div class="payment-number">01342392408</div>
+                <p>After payment, provide your information below</p>
+            </div>
+            <form id="paymentForm">
+                <input type="hidden" id="productName">
+                <input type="hidden" id="productPrice">
+                <div class="form-group">
+                    <label for="phone">Your bKash Number</label>
+                    <input type="text" id="phone" placeholder="Enter your bKash number" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction">Transaction ID</label>
+                    <input type="text" id="transaction" placeholder="Enter your transaction ID" required>
+                </div>
+                <button type="button" class="submit-btn" onclick="processPayment()">Submit Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Page (initially hidden) -->
+    <section class="success-page" id="successPage" style="display: none;">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h2>Payment Successful!</h2>
+        <p>Your product <span id="activatedProduct"></span> has been activated successfully.</p>
+        <p>Transaction ID: <span id="displayTransaction"></span></p>
+        <p>We've sent the download link to your phone number.</p>
+        <a href="#" class="btn" onclick="goBack()">Please wait 6 hours for full Activatoin</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>PluginDeals offers premium WordPress plugins and themes at discounted prices for individuals and businesses.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#">Home</a>
+                    <a href="#">Plugins</a>
+                    <a href="#">Themes</a>
+                    <a href="#">Bundle Deals</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 1234 Road Mohakhaki, Dhaka</p>
+                    <p><i class="fas fa-phone"></i> +8801756630635</p>
+                    <p><i class="fas fa-envelope"></i> info@plugindeals.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2015-25 PluginDeals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to open payment modal
+        function openPayment(productName, productPrice) {
+            document.getElementById('productName').value = productName;
+            document.getElementById('productPrice').value = productPrice;
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        // Function to close payment modal
+        function closePayment() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        // Function to process payment
+        function processPayment() {
+            const phone = document.getElementById('phone').value;
+            const transaction = document.getElementById('transaction').value;
+            const productName = document.getElementById('productName').value;
+            
+            if (phone && transaction) {
+                // Store payment info in localStorage
+                localStorage.setItem('paidProduct', productName);
+                localStorage.setItem('transactionId', transaction);
+                
+                // Close modal
+                closePayment();
+                
+                // Show success message
+                alert('Payment submitted successfully! You can now activate your product.');
+            } else {
+                alert('Please provide your phone number and transaction ID.');
+            }
+        }
+
+        // Function to activate product
+        function activateProduct(productName) {
+            const paidProduct = localStorage.getItem('paidProduct');
+            const transactionId = localStorage.getItem('transactionId');
+            
+            if (paidProduct === productName && transactionId) {
+                // Show success page
+                document.getElementById('activatedProduct').textContent = productName;
+                document.getElementById('displayTransaction').textContent = transactionId;
+                
+                // Hide all other sections
+                document.querySelector('header').style.display = 'none';
+                document.querySelector('.hero').style.display = 'none';
+                document.querySelector('.products').style.display = 'none';
+                document.querySelector('footer').style.display = 'none';
+                
+                // Show success page
+                document.getElementById('successPage').style.display = 'block';
+            } else {
+                alert('Please complete payment first before activating the product.');
+            }
+        }
+
+        // Function to go back to products
+        function goBack() {
+            // Show all sections again
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.products').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            
+            // Hide success page
+            document.getElementById('successPage').style.display = 'none';
+        }
+
+        // Close modal if clicked outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closePayment();
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+
+</sup></font> <del><font color="green">$109.00</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('Waves Vocal Rider', 79.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('Waves Vocal Rider')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              <!-- Audition Product 10 -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-...?" alt="iZotope RX Suite in Audition">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">iZotope RX Suite</h3>
+              <p class="product-description">Professional-grade audio restoration and noise reduction tools.12</p>
+              <div class="product-price">$299.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$399.00</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('iZotope RX Suite', 299.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('iZotope RX Suite')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              
+              
+              
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Form Builder">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Form Builder Pro</h3>
+                        <p class="product-description">Create custom forms, surveys, and quizzes with our drag-and-drop builder.</p>
+                        <div class="product-price">$39.99</div>
+                        <div class="product-buttons">
+                            <button class="pay-btn" onclick="openPayment('Form Builder Pro', 39.99)">Pay Now</button>
+                            <button class="active-btn" onclick="activateProduct('Form Builder Pro')">Active Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Complete Payment</h2>
+                <span class="close-btn" onclick="closePayment()">&times;</span>
+            </div>
+            <div class="payment-info">
+                <h3>Send payment via bKash</h3>
+                <p>Send exact amount to the following bKash number:</p>
+                <div class="payment-number">01342392408</div>
+                <p>After payment, provide your information below</p>
+            </div>
+            <form id="paymentForm">
+                <input type="hidden" id="productName">
+                <input type="hidden" id="productPrice">
+                <div class="form-group">
+                    <label for="phone">Your bKash Number</label>
+                    <input type="text" id="phone" placeholder="Enter your bKash number" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction">Transaction ID</label>
+                    <input type="text" id="transaction" placeholder="Enter your transaction ID" required>
+                </div>
+                <button type="button" class="submit-btn" onclick="processPayment()">Submit Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Page (initially hidden) -->
+    <section class="success-page" id="successPage" style="display: none;">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h2>Payment Successful!</h2>
+        <p>Your product <span id="activatedProduct"></span> has been activated successfully.</p>
+        <p>Transaction ID: <span id="displayTransaction"></span></p>
+        <p>We've sent the download link to your phone number.</p>
+        <a href="#" class="btn" onclick="goBack()">Please wait 6 hours for full Activatoin</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>PluginDeals offers premium WordPress plugins and themes at discounted prices for individuals and businesses.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#">Home</a>
+                    <a href="#">Plugins</a>
+                    <a href="#">Themes</a>
+                    <a href="#">Bundle Deals</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 1234 Road Mohakhaki, Dhaka</p>
+                    <p><i class="fas fa-phone"></i> +8801756630635</p>
+                    <p><i class="fas fa-envelope"></i> info@plugindeals.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2015-25 PluginDeals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to open payment modal
+        function openPayment(productName, productPrice) {
+            document.getElementById('productName').value = productName;
+            document.getElementById('productPrice').value = productPrice;
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        // Function to close payment modal
+        function closePayment() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        // Function to process payment
+        function processPayment() {
+            const phone = document.getElementById('phone').value;
+            const transaction = document.getElementById('transaction').value;
+            const productName = document.getElementById('productName').value;
+            
+            if (phone && transaction) {
+                // Store payment info in localStorage
+                localStorage.setItem('paidProduct', productName);
+                localStorage.setItem('transactionId', transaction);
+                
+                // Close modal
+                closePayment();
+                
+                // Show success message
+                alert('Payment submitted successfully! You can now activate your product.');
+            } else {
+                alert('Please provide your phone number and transaction ID.');
+            }
+        }
+
+        // Function to activate product
+        function activateProduct(productName) {
+            const paidProduct = localStorage.getItem('paidProduct');
+            const transactionId = localStorage.getItem('transactionId');
+            
+            if (paidProduct === productName && transactionId) {
+                // Show success page
+                document.getElementById('activatedProduct').textContent = productName;
+                document.getElementById('displayTransaction').textContent = transactionId;
+                
+                // Hide all other sections
+                document.querySelector('header').style.display = 'none';
+                document.querySelector('.hero').style.display = 'none';
+                document.querySelector('.products').style.display = 'none';
+                document.querySelector('footer').style.display = 'none';
+                
+                // Show success page
+                document.getElementById('successPage').style.display = 'block';
+            } else {
+                alert('Please complete payment first before activating the product.');
+            }
+        }
+
+        // Function to go back to products
+        function goBack() {
+            // Show all sections again
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.products').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            
+            // Hide success page
+            document.getElementById('successPage').style.display = 'none';
+        }
+
+        // Close modal if clicked outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closePayment();
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+
+9</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('Logo Package Express', 59.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('Logo Package Express')">Active Now</button>
+              </div>
+              </div>
+              </div>
+              
+              <!-- Illustrator Product 10 -->
+              <div class="product-card">
+              <div class="product-image">
+              <img src="https://images.unsplash.com/photo-...?" alt="GuideGuide in Illustrator">
+              </div>
+              <div class="product-info">
+              <h3 class="product-title">GuideGuide</h3>
+              <p class="product-description">Draw precise columns, rows, anchors inside Illustrator.22</p>
+              <div class="product-price">$19.00 <font color="red" size="2px"><sup>OFFER</sup></font> <del><font color="green">$24.99</font></del></div>
+              <div class="product-buttons">
+              <button class="pay-btn" onclick="openPayment('GuideGuide', 19.00)">Pay Now</button>
+              <button class="active-btn" onclick="activateProduct('GuideGuide')">Active Now</button>
+              </div>
+              </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Form Builder">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Form Builder Pro</h3>
+                        <p class="product-description">Create custom forms, surveys, and quizzes with our drag-and-drop builder.</p>
+                        <div class="product-price">$39.99</div>
+                        <div class="product-buttons">
+                            <button class="pay-btn" onclick="openPayment('Form Builder Pro', 39.99)">Pay Now</button>
+                            <button class="active-btn" onclick="activateProduct('Form Builder Pro')">Active Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Complete Payment</h2>
+                <span class="close-btn" onclick="closePayment()">&times;</span>
+            </div>
+            <div class="payment-info">
+                <h3>Send payment via bKash</h3>
+                <p>Send exact amount to the following bKash number:</p>
+                <div class="payment-number">01342392408</div>
+                <p>After payment, provide your information below</p>
+            </div>
+            <form id="paymentForm">
+                <input type="hidden" id="productName">
+                <input type="hidden" id="productPrice">
+                <div class="form-group">
+                    <label for="phone">Your bKash Number</label>
+                    <input type="text" id="phone" placeholder="Enter your bKash number" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction">Transaction ID</label>
+                    <input type="text" id="transaction" placeholder="Enter your transaction ID" required>
+                </div>
+                <button type="button" class="submit-btn" onclick="processPayment()">Submit Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Page (initially hidden) -->
+    <section class="success-page" id="successPage" style="display: none;">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h2>Payment Successful!</h2>
+        <p>Your product <span id="activatedProduct"></span> has been activated successfully.</p>
+        <p>Transaction ID: <span id="displayTransaction"></span></p>
+        <p>We've sent the download link to your phone number.</p>
+        <a href="#" class="btn" onclick="goBack()">Please wait 6 hours for full Activatoin</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>PluginDeals offers premium WordPress plugins and themes at discounted prices for individuals and businesses.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#">Home</a>
+                    <a href="#">Plugins</a>
+                    <a href="#">Themes</a>
+                    <a href="#">Bundle Deals</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 1234 Road Mohakhaki, Dhaka</p>
+                    <p><i class="fas fa-phone"></i> +8801756630635</p>
+                    <p><i class="fas fa-envelope"></i> info@plugindeals.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2015-25 PluginDeals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to open payment modal
+        function openPayment(productName, productPrice) {
+            document.getElementById('productName').value = productName;
+            document.getElementById('productPrice').value = productPrice;
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        // Function to close payment modal
+        function closePayment() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        // Function to process payment
+        function processPayment() {
+            const phone = document.getElementById('phone').value;
+            const transaction = document.getElementById('transaction').value;
+            const productName = document.getElementById('productName').value;
+            
+            if (phone && transaction) {
+                // Store payment info in localStorage
+                localStorage.setItem('paidProduct', productName);
+                localStorage.setItem('transactionId', transaction);
+                
+                // Close modal
+                closePayment();
+                
+                // Show success message
+                alert('Payment submitted successfully! You can now activate your product.');
+            } else {
+                alert('Please provide your phone number and transaction ID.');
+            }
+        }
+
+        // Function to activate product
+        function activateProduct(productName) {
+            const paidProduct = localStorage.getItem('paidProduct');
+            const transactionId = localStorage.getItem('transactionId');
+            
+            if (paidProduct === productName && transactionId) {
+                // Show success page
+                document.getElementById('activatedProduct').textContent = productName;
+                document.getElementById('displayTransaction').textContent = transactionId;
+                
+                // Hide all other sections
+                document.querySelector('header').style.display = 'none';
+                document.querySelector('.hero').style.display = 'none';
+                document.querySelector('.products').style.display = 'none';
+                document.querySelector('footer').style.display = 'none';
+                
+                // Show success page
+                document.getElementById('successPage').style.display = 'block';
+            } else {
+                alert('Please complete payment first before activating the product.');
+            }
+        }
+
+        // Function to go back to products
+        function goBack() {
+            // Show all sections again
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.products').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            
+            // Hide success page
+            document.getElementById('successPage').style.display = 'none';
+        }
+
+        // Close modal if clicked outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closePayment();
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+
